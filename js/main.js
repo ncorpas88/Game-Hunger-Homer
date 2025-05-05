@@ -14,27 +14,54 @@ const startBtnNode = document.querySelector("#start-btn");
 
 // VARIABLES GLOBALES DEL JUEGO
 let homerObj = null;
-let donutObj = null;
+let donutObjArr = [];
+let frutaObjArr = [];
 
 // FUNCIONES GLOBALES DEL JUEGO
 
 function startGame() {
-  console.log("inicio juego");
+
   // 1. Ocultar pantalla de inicio
   splashScreenNode.style.display = "none";
+
   // 2. mostrar la pantalla de juego
   gameScreenNode.style.display = "flex";
+
   // 3. añadimos elemento inicial del juego (Homer)
+  
   homerObj = new Homer();
-  donutObj = new Donuts();
   // 4. iniciamos intervalo principal del juego
   setInterval(() => {
     gameLoop();
   }, Math.round(1000 / 60)); //60fps
+
   // 5. iniciamos otro intervalo del juego
+  setInterval(() => {
+    donutAppear();
+    frutaAppear();
+  },Math.random() * 1000) //los donuts aparecen cada dos segundos
 }
 
-function gameLoop() {}
+function gameLoop() {
+  donutObjArr.forEach((eachDonutObj) => {
+    eachDonutObj.automaticMovement();
+  });
+
+  frutaObjArr.forEach((eachFrutaObj) => {
+    eachFrutaObj.automaticMovement();
+  });
+
+}
+
+function donutAppear(){
+  let donutObj = new Donut(Math.random() * 900);
+  donutObjArr.push(donutObj);
+}
+
+function frutaAppear(){
+  let frutaObj = new Fruta(Math.random() * 900);
+  frutaObjArr.push(frutaObj);
+}
 
 // EVENT LISTENERS
 

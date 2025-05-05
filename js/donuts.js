@@ -1,16 +1,16 @@
-class Donuts {
-    constructor(){
+class Donut {
+    constructor(positionX){
       
         this.node = document.createElement("img"); // representacion visual de donuts
         this.node.src = "./images/donut.png"; // apariencia visual de donuts
 
         gameBoxNode.append(this.node); // coge el nodo de la imagen y lo inserta en el juego
 
-        this.x = 50;
-        this.y = 50;
+        this.x = positionX;
+        this.y = 0;
         this.w = 30;
         this.h = 30;
-        this.speed = 5
+        this.speed = 2
 
         // definimos dimensiones iniciales
         this.node.style.width = `${this.w}px`;
@@ -27,4 +27,13 @@ class Donuts {
     }
 
     //metodos
+
+    automaticMovement(){
+        this.y += this.speed;
+        this.node.style.top = `${this.y}px`;
+
+    }
+
+
 }
+
