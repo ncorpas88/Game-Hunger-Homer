@@ -1,8 +1,14 @@
 class Fruta{
-    constructor(positionX){
+    constructor(type, positionX){
 
+        this.type = type;
         this.node = document.createElement("img"); // representacion visual de frutas
-        this.node.src = "./images/cereza.png"; // apariencia visual de frutas
+        if(this.type === "cereza"){
+            this.node.src = "./images/cereza.png"; // apariencia visual de frutas
+        }else if (this.type === "fresa"){
+            this.node.src = "./images/fresa.png"; // apariencia visual de frutas
+        }
+        
 
         gameBoxNode.append(this.node); // coge el nodo de la imagen y lo inserta en el juego
 

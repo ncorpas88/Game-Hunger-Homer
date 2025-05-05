@@ -38,8 +38,11 @@ function startGame() {
   // 5. iniciamos otro intervalo del juego
   setInterval(() => {
     donutAppear();
+  },2000) //los donuts aparecen cada dos segundos
+
+  setInterval(() => {
     frutaAppear();
-  },Math.random() * 1000) //los donuts aparecen cada dos segundos
+  }, 1000)
 }
 
 function gameLoop() {
@@ -51,16 +54,35 @@ function gameLoop() {
     eachFrutaObj.automaticMovement();
   });
 
+  elementsDestoy();
+
 }
 
 function donutAppear(){
-  let donutObj = new Donut(Math.random() * 900);
+  let donutObj = new Donut(Math.random() * 370);
   donutObjArr.push(donutObj);
 }
 
 function frutaAppear(){
-  let frutaObj = new Fruta(Math.random() * 900);
-  frutaObjArr.push(frutaObj);
+  let frutaObj1 = new Fruta("cereza", Math.random() * 370);
+  frutaObjArr.push(frutaObj1);
+
+  let frutaObj2 = new Fruta("fresa", Math.random() * 370);
+  frutaObjArr.push(frutaObj2);
+}
+
+function elementsDestoy(){
+
+  if(donutObjArr.length < 730 && (donutObjArr[0].y + donutObjArr[0].h) >= 730){
+    donutObjArr[0].node.remove();
+    donutObjArr.shift();
+  }
+
+  if(frutaObjArr.length < 730 && (frutaObjArr[0].y + frutaObjArr[0].h) >= 730){
+    frutaObjArr[0].node.remove();
+    frutaObjArr.shift();
+  }
+
 }
 
 // EVENT LISTENERS
