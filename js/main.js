@@ -6,10 +6,12 @@ const gameScreenNode = document.querySelector("#game-screen");
 const gameOverScreenNode = document.querySelector("#game-over.screen");
 const gameBoxNode = document.querySelector("#game-box");
 const scoreBoard = document.querySelector("#score");
+const bgMusic = new Audio(`./sounds/music.mp3`)
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
 
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
-
 // Game box
 
 // VARIABLES GLOBALES DEL JUEGO
@@ -20,7 +22,7 @@ let gameIntervalId = null;
 let donutIntervalId = null;
 let frutaIntervalId = null;
 let score = 3;
-
+const juegoAncho = 400;
 // FUNCIONES GLOBALES DEL JUEGO
 
 function startGame() {
@@ -96,7 +98,7 @@ function colisionHomerDonut() {
       homerObj.h + homerObj.y > eachDonutObj.y
     ) {
       // ¡colisión detectada!
-      score++;
+      score += 2;
       scoreBoard.textContent = `Score: ${score}`;
       donutObjArr[0].node.remove();
       donutObjArr.shift();
@@ -115,13 +117,17 @@ function colisionHomerFruit() {
       // ¡colisión detectada!
       score--;
       scoreBoard.textContent = `Score: ${score}`;
+      if (score <= 0) {
+        gameOver();
+      }
       frutaObjArr[0].node.remove();
       frutaObjArr.shift();
+      
     }
   });
 }
 
-function dameOver() {
+function gameOver() {
   //1. detener el intervalo
   clearInterval(gameIntervalId);
   clearInterval(donutIntervalId);
@@ -137,14 +143,17 @@ function dameOver() {
 
 startBtnNode.addEventListener("click", () => {
   startGame();
+  bgMusic.play();
 });
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     homerObj.x -= homerObj.speed;
+    homerObj.x = Math.max(0, homerObj.x);
     homerObj.node.style.left = `${homerObj.x}px`;
   } else if (event.key === "ArrowRight") {
     homerObj.x += homerObj.speed;
+    homerObj.x = Math.min(juegoAncho - homerObj.w, homerObj.x);
     homerObj.node.style.left = `${homerObj.x}px`;
   }
 });
