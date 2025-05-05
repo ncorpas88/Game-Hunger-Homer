@@ -11,24 +11,28 @@
     
     <!-- PANTALLA DE INICIO -->
     <div id="splash-screen" class="container">
-      <img src="" alt="logo-inicio" />
-      <button id="start-button">Start!</button>
+      <img src="images/fondoinicio.png" width="400" alt="logo-inicio" />
+      <button id="start-btn">Start!</button>
     </div>
 
     <!-- PANTALLA DE JUEGO -->
     <div id="game-screen" class="container">
+      <div id="score">Puntos: 0 | Vidas: 3</div>
       <!-- Elementos del juego como puntuación, vidas, etc deberia ir aqui (dentro del game-screen pero fuera del game-box) -->
       <div id="game-box">
         <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
+         <div id="homer"></div>
       </div>
     </div>
 
-    <!-- PANTALLA DE JUEGO FINAL -->
+    <!-- PANTALLA FINAL  -->
     <div id="game-over-screen" class="container">
-      <img src="" width="500" alt="logo-game-over" />
+      <img src="images/fondojuego.png" width="400" alt="logo-game-over" />
+      <button id="restart-btn">Restart!</button>
     </div>
 
     <!--SCRIPT JAVASCRIPT-->
     <script src="./js/main.js"></script>
+    <script src="./js/homer.js"></scriptsrc></script>
   </body>
 </html>
