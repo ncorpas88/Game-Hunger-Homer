@@ -5,9 +5,6 @@ const splashScreenNode = document.querySelector("#splash-screen");
 const gameScreenNode = document.querySelector("#game-screen");
 const gameOverScreenNode = document.querySelector("#game-over.screen");
 const gameBoxNode = document.querySelector("#game-box");
-const homerNode = document.createElement("div");
-homerNode.id = "homer";
-gameBoxNode.append(homerNode);
 
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
@@ -16,6 +13,8 @@ const startBtnNode = document.querySelector("#start-btn");
 
 
 // VARIABLES GLOBALES DEL JUEGO
+let homerObj = null;
+let donutObj = null;
 
 // FUNCIONES GLOBALES DEL JUEGO
 
@@ -27,6 +26,7 @@ function startGame() {
   gameScreenNode.style.display = "flex";
   // 3. añadimos elemento inicial del juego (Homer)
   homerObj = new Homer();
+  donutObj = new Donuts();
   // 4. iniciamos intervalo principal del juego
   setInterval(() => {
     gameLoop();
@@ -45,9 +45,9 @@ startBtnNode.addEventListener("click", () => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     homerObj.x -= homerObj.speed;
-    homerNode.style.left = `${homerObj.x}px`;
+    homerObj.node.style.left = `${homerObj.x}px`;
   } else if (event.key === "ArrowRight") {
-    homerObj.y += homerObj.speed;
-    homerNode.style.rigth = `${homerObj.y}px`;
+    homerObj.x += homerObj.speed;
+    homerObj.node.style.left = `${homerObj.x}px`;
   }
 });

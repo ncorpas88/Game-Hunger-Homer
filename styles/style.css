@@ -28,11 +28,4 @@
     display: none;
   }
 
-  #homer{
-    background-image: url(../images/homer.png);
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: auto;
-    left: auto;
-  }
+ 
