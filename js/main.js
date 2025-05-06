@@ -3,15 +3,19 @@
 // Pantalla
 const splashScreenNode = document.querySelector("#splash-screen");
 const gameScreenNode = document.querySelector("#game-screen");
-const gameOverScreenNode = document.querySelector("#game-over.screen");
+const gameOverScreenNode = document.querySelector("#game-over-screen");
 const gameBoxNode = document.querySelector("#game-box");
 const scoreBoard = document.querySelector("#score");
 const bgMusic = new Audio(`./sounds/music.mp3`)
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
+const musicGameOver = new Audio(`./sounds/gameover.mp3`);
+musicGameOver.loop = true;
+musicGameOver.volume = 0.5;
 
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
+const restartBtnNode = document.querySelector("#restart-btn");
 // Game box
 
 // VARIABLES GLOBALES DEL JUEGO
@@ -98,7 +102,7 @@ function colisionHomerDonut() {
       homerObj.h + homerObj.y > eachDonutObj.y
     ) {
       // ¡colisión detectada!
-      score += 2;
+      score ++;
       scoreBoard.textContent = `Score: ${score}`;
       donutObjArr[0].node.remove();
       donutObjArr.shift();
@@ -107,7 +111,7 @@ function colisionHomerDonut() {
 }
 
 function colisionHomerFruit() {
-  frutaObjArr.forEach((eachFrutaObj) => {
+  frutaObjArr.forEach((eachFrutaObj, index) => {
     if (
       homerObj.x < eachFrutaObj.x + eachFrutaObj.w &&
       homerObj.x + homerObj.w > eachFrutaObj.x &&
@@ -121,7 +125,7 @@ function colisionHomerFruit() {
         gameOver();
       }
       frutaObjArr[0].node.remove();
-      frutaObjArr.shift();
+      frutaObjArr.splice(index, 1);
       
     }
   });
@@ -132,6 +136,8 @@ function gameOver() {
   clearInterval(gameIntervalId);
   clearInterval(donutIntervalId);
   clearInterval(frutaIntervalId);
+  bgMusic.pause();
+  musicGameOver.play();
   //2. ocultar pantalla de juego
   gameScreenNode.style.display = "none";
 
@@ -139,11 +145,36 @@ function gameOver() {
   gameOverScreenNode.style.display = "flex";
 }
 
+function resetGame(){
+  donutObjArr.forEach((eachDonut) => eachDonut.node.remove());
+  frutaObjArr.forEach((eachFruta) => eachFruta.node.remove());
+  homerObj.node.remove();
+
+  donutObjArr = [];
+  frutaObjArr = [];
+
+  score = 3;
+  scoreBoard.textContent = `Score: ${score}`;
+
+  homerObj = null;
+
+  bgMusic.currentTime = 0;
+}
+
+
 // EVENT LISTENERS
 
 startBtnNode.addEventListener("click", () => {
   startGame();
   bgMusic.play();
+});
+
+restartBtnNode.addEventListener("click", () => {
+  resetGame();
+  startGame();
+  bgMusic.play();
+  musicGameOver.pause();
+  gameOverScreenNode.style.display = "none";
 });
 
 document.addEventListener("keydown", (event) => {
