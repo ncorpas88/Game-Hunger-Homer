@@ -22,6 +22,7 @@ const restartBtnNode = document.querySelector("#restart-btn");
 let homerObj = null;
 let donutObjArr = [];
 let frutaObjArr = [];
+let srBurnsObj = null;
 let gameIntervalId = null;
 let donutIntervalId = null;
 let frutaIntervalId = null;
@@ -39,6 +40,7 @@ function startGame() {
   // 3. añadimos elemento inicial del juego (Homer)
 
   homerObj = new Homer();
+  srBurnsObj = new Burns();
   // 4. iniciamos intervalo principal del juego
   gameIntervalId = setInterval(() => {
     gameLoop();
@@ -47,11 +49,11 @@ function startGame() {
   // 5. iniciamos otro intervalo del juego
   donutIntervalId = setInterval(() => {
     donutAppear();
-  }, 2000); //los donuts aparecen cada dos segundos
+  }, 1500); //los donuts aparecen cada dos segundos
 
   frutaIntervalId = setInterval(() => {
     frutaAppear();
-  }, 1000);
+  }, 1500);
 }
 
 function gameLoop() {
@@ -66,6 +68,9 @@ function gameLoop() {
   elementsDestoy();
   colisionHomerDonut();
   colisionHomerFruit();
+  moverSrBurns();
+  colisionBurns();
+  colisionBurnsHomer();
 }
 
 function donutAppear() {
@@ -149,6 +154,7 @@ function resetGame(){
   donutObjArr.forEach((eachDonut) => eachDonut.node.remove());
   frutaObjArr.forEach((eachFruta) => eachFruta.node.remove());
   homerObj.node.remove();
+  srBurnsObj.node.remove()
 
   donutObjArr = [];
   frutaObjArr = [];
@@ -157,11 +163,59 @@ function resetGame(){
   scoreBoard.textContent = `Score: ${score}`;
 
   homerObj = null;
+  srBurnsObj = null;
 
   bgMusic.currentTime = 0;
 }
 
+function moverSrBurns() {
 
+  if(srBurnsObj.isMovingRight === true) {
+    srBurnsObj.x += srBurnsObj.speed;
+    srBurnsObj.node.style.left = `${srBurnsObj.x}px`;
+  }else {
+    srBurnsObj.x -= srBurnsObj.speed;
+    srBurnsObj.node.style.left = `${srBurnsObj.x}px`;
+  }
+
+  if(srBurnsObj.isMovingDown === true) {
+    srBurnsObj.y += srBurnsObj.speed;
+    srBurnsObj.node.style.top = `${srBurnsObj.y}px`;
+  }else {
+    srBurnsObj.y -= srBurnsObj.speed;
+    srBurnsObj.node.style.top = `${srBurnsObj.y}px`
+  }
+}
+
+function colisionBurns(){
+  if(srBurnsObj.x > (gameBoxNode.offsetWidth - srBurnsObj.w)) {
+    srBurnsObj.isMovingRight = false;
+  }
+
+  if(srBurnsObj.y > (gameBoxNode.offsetHeight - srBurnsObj.h)) {
+    srBurnsObj.isMovingDown = false;
+  }
+
+  if(srBurnsObj.x <= 0) {
+    srBurnsObj.isMovingRight = true;
+  }
+
+  if(srBurnsObj.y <= 0) {
+    srBurnsObj.isMovingDown = true;
+  }
+}
+
+function colisionBurnsHomer() {
+    if (
+      homerObj.x < srBurnsObj.x + srBurnsObj.w &&
+      homerObj.x + homerObj.w > srBurnsObj.x &&
+      homerObj.y < srBurnsObj.y + srBurnsObj.h &&
+      homerObj.h + homerObj.y > srBurnsObj.y
+    ) {
+      gameOver()
+    }
+ 
+}
 // EVENT LISTENERS
 
 startBtnNode.addEventListener("click", () => {

@@ -1,16 +1,19 @@
-class Homer{
-    constructor(){
+class Burns {
+    constructor() {
 
         this.node = document.createElement("img"); // representacion visual de Homer
-        this.node.src = "./images/homer.png"; // apariencia visual de Homer
+        this.node.src = "./images/burns.png"; // apariencia visual de Homer
 
         gameBoxNode.append(this.node); // coge el nodo de la imagen y lo inserta en el juego
 
-        this.x = 50;
-        this.y = 570;
-        this.w = 95;
-        this.h = 120;
-        this.speed = 15
+        this.x = -73;
+        this.y = -98;
+        this.w = 88;
+        this.h = 97;
+        this.speed = 2
+        this.isMovingRigt = true;
+        this.isMovingDown = true;
+        
 
         // definimos dimensiones iniciales
         this.node.style.width = `${this.w}px`;
@@ -24,7 +27,4 @@ class Homer{
         this.node.style.left = `${this.x}px`;
 
     }
-
-   
-        
 }
