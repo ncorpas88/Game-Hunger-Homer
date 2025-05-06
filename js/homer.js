@@ -8,8 +8,8 @@ class Homer{
 
         this.x = 50;
         this.y = 570;
-        this.w = 95;
-        this.h = 120;
+        this.w = 85;
+        this.h = 110;
         this.speed = 15
 
         // definimos dimensiones iniciales

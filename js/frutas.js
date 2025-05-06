@@ -14,8 +14,8 @@ class Fruta{
 
         this.x = positionX;
         this.y = 0;
-        this.w = 30;
-        this.h = 30;
+        this.w = 40;
+        this.h = 40;
         this.speed = 2
 
         // definimos dimensiones iniciales

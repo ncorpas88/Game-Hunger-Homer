@@ -74,15 +74,15 @@ function gameLoop() {
 }
 
 function donutAppear() {
-  let donutObj = new Donut(Math.random() * 370);
+  let donutObj = new Donut(Math.random() * 360);
   donutObjArr.push(donutObj);
 }
 
 function frutaAppear() {
-  let frutaObj1 = new Fruta("cereza", Math.random() * 370);
+  let frutaObj1 = new Fruta("cereza", Math.random() * 360);
   frutaObjArr.push(frutaObj1);
 
-  let frutaObj2 = new Fruta("fresa", Math.random() * 370);
+  let frutaObj2 = new Fruta("fresa", Math.random() * 360);
   frutaObjArr.push(frutaObj2);
 }
 
