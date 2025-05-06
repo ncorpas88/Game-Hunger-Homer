@@ -124,7 +124,7 @@ function colisionHomerFruit() {
       if (score <= 0) {
         gameOver();
       }
-      frutaObjArr[0].node.remove();
+      frutaObjArr[index].node.remove();
       frutaObjArr.splice(index, 1);
       
     }
