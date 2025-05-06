@@ -30,15 +30,21 @@
   }
 
  
-  .botonera {
+  .contenedor {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    height: 100vh;
+    gap: 50px;
     padding: 80px;
-    position: absolute;
-    top: 138px;
-    right: 48px;
-    gap: 10px;
+  }
+  
+  .botonera,
+  .botonreset {
+      position: relative;
+      bottom: 533px;
+      right: -42px;
   }
   
   button {
@@ -52,21 +58,10 @@
   }
   
   .icon {
-    height: 230px;
+    height: 211px;
   }
-
-
-  .botonreset {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 80px;
-    position: absolute;
-    top: 368px;
-    right: 248px;
-    gap: 10px;
+  
+  .resetIcon {
+    height: 150px;
   }
-
- .resetIcon {
-  height: 150px;
- }
+  
