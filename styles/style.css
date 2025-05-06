@@ -30,4 +30,27 @@
   }
 
  
- 
+  .botonera {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 80px;
+    position: absolute;
+    top: 138px;
+    right: 48px;
+    gap: 10px;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+  
+  .icon {
+    height: 230px;
+  }
