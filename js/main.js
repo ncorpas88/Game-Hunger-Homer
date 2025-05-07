@@ -255,7 +255,15 @@ function colisionBurnsBeer() {
       scoreBoard.textContent = `Score: ${score}`;
 
       setTimeout(() => {
+        const randomX = Math.random() * (gameBoxNode.offsetWidth - 34);
+        const randomY = Math.random() * (gameBoxNode.offsetHeight - 186);
+
         srBurnsObj = new Burns();
+
+        srBurnsObj.x = randomX;
+        srBurnsObj.y = randomY;
+        srBurnsObj.node.style.left = `${srBurnsObj.x}px`;
+        srBurnsObj.node.style.top = `${srBurnsObj.y}px`;
       }, 5000);
     }
   });
