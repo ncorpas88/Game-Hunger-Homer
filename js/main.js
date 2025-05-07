@@ -83,20 +83,63 @@ function gameLoop() {
   colisionBurns();
   colisionBurnsHomer();
   colisionBurnsBeer();
+  colisionFrutaDonut();
 }
 
-function donutAppear() {
-  let donutObj = new Donut(Math.random() * 359.341);
-  donutObjArr.push(donutObj);
-}
+  function donutAppear() {
+    let nuevoDonut;
+    let colisiona = true;
+  
+    while (colisiona) {
+      const randomX = Math.random() * (gameBoxNode.offsetWidth - 40); // ancho aprox del donut
+      nuevoDonut = new Donut(randomX);
+      colisiona = false;
+  
+      // Verifica si colisiona con alguna fruta
+      for (let fruta of frutaObjArr) {
+        if (hayColision(nuevoDonut, fruta)) {
+          colisiona = true;
+          nuevoDonut.node.remove(); // eliminamos el nodo para evitar basura en el DOM
+          break;
+        }
+      }
+    }
+  
+    donutObjArr.push(nuevoDonut);
+  }
 
-function frutaAppear() {
-  let frutaObj1 = new Fruta("cereza", Math.random() * 360.76);
-  frutaObjArr.push(frutaObj1);
-
-  let frutaObj2 = new Fruta("fresa", Math.random() * 360.13);
-  frutaObjArr.push(frutaObj2);
-}
+  function frutaAppear() {
+    let fruta1, fruta2;
+    let colisiona = true;
+  
+    while (colisiona) {
+      const pos1 = Math.random() * (gameBoxNode.offsetWidth - 40);
+      const pos2 = Math.random() * (gameBoxNode.offsetWidth - 40);
+  
+      fruta1 = new Fruta("cereza", pos1);
+      fruta2 = new Fruta("fresa", pos2);
+  
+      colisiona = false;
+  
+      if (hayColision(fruta1, fruta2)) {
+        colisiona = true;
+      }
+  
+      for (let donut of donutObjArr) {
+        if (hayColision(fruta1, donut) || hayColision(fruta2, donut)) {
+          colisiona = true;
+          break;
+        }
+      }
+  
+      if (colisiona) {
+        fruta1.node.remove();
+        fruta2.node.remove();
+      }
+    }
+  
+    frutaObjArr.push(fruta1, fruta2);
+  }
 
 function elementsDestoy() {
   if (donutObjArr.length < 730 && donutObjArr[0].y + donutObjArr[0].h >= 730) {
@@ -123,6 +166,7 @@ function colisionHomerDonut() {
       scoreBoard.textContent = `Score: ${score}`;
       donutObjArr[0].node.remove();
       donutObjArr.shift();
+
     }
   });
 }
@@ -268,6 +312,32 @@ function colisionBurnsBeer() {
     }
   });
 }
+
+function hayColision(objA, objB) {
+  return (
+    objA.x < objB.x + objB.w &&
+    objA.x + objA.w > objB.x &&
+    objA.y < objB.y + objB.h &&
+    objA.h + objA.y > objB.y
+  );
+}
+
+function colisionFrutaDonut() {
+  frutaObjArr.forEach((fruta, frutaIndex) => {
+    donutObjArr.forEach((donut, donutIndex) => {
+      if (hayColision(fruta, donut)) {
+        // Eliminar ambos nodos del DOM
+        fruta.node.remove();
+        donut.node.remove();
+
+        // Eliminar de los arrays
+        frutaObjArr.splice(frutaIndex, 1);
+        donutObjArr.splice(donutIndex, 1);
+      }
+    });
+  });
+}
+
 // EVENT LISTENERS
 
 startBtnNode.addEventListener("click", () => {
