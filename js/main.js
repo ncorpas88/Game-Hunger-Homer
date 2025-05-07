@@ -21,11 +21,14 @@ const restartBtnNode = document.querySelector("#restart-btn");
 // VARIABLES GLOBALES DEL JUEGO
 let homerObj = null;
 let donutObjArr = [];
+let beerDisparoArr = [];
 let frutaObjArr = [];
 let srBurnsObj = null;
+let beerObj = null;
 let gameIntervalId = null;
 let donutIntervalId = null;
 let frutaIntervalId = null;
+
 let score = 3;
 const juegoAncho = 400;
 // FUNCIONES GLOBALES DEL JUEGO
@@ -65,12 +68,21 @@ function gameLoop() {
     eachFrutaObj.automaticMovement();
   });
 
+  beerDisparoArr.forEach((beerObj, index) => {
+    beerObj.disparo();
+    if(beerObj.y + beerObj.h < 0){
+      beerObj.node.remove();
+      beerDisparoArr.splice(index, 1);
+    }
+  });
+
   elementsDestoy();
   colisionHomerDonut();
   colisionHomerFruit();
   moverSrBurns();
   colisionBurns();
   colisionBurnsHomer();
+  colisionBurnsBeer();
 }
 
 function donutAppear() {
@@ -154,7 +166,8 @@ function resetGame(){
   donutObjArr.forEach((eachDonut) => eachDonut.node.remove());
   frutaObjArr.forEach((eachFruta) => eachFruta.node.remove());
   homerObj.node.remove();
-  srBurnsObj.node.remove()
+  srBurnsObj.node.remove();
+  
 
   donutObjArr = [];
   frutaObjArr = [];
@@ -218,7 +231,34 @@ function colisionBurnsHomer() {
 }
 
 function disparoHomer(){
-  
+  const x = homerObj.x + homerObj.w / 2 - 5;
+  const y = homerObj.y;
+  const newBeer = new Beer(x, y);
+  beerDisparoArr.push(newBeer);
+}
+
+function colisionBurnsBeer() {
+  beerDisparoArr.forEach((eachBeerObj, index) => {
+    if (
+      eachBeerObj.x < srBurnsObj.x + srBurnsObj.w &&
+      eachBeerObj.x + eachBeerObj.w > srBurnsObj.x &&
+      eachBeerObj.y < srBurnsObj.y + srBurnsObj.h &&
+      eachBeerObj.y + eachBeerObj.h > srBurnsObj.y
+    ){
+      eachBeerObj.node.remove();
+      beerDisparoArr.splice(index, 1);
+
+      srBurnsObj.node.remove();
+      srBurnsObj = null;
+
+      score += 2;
+      scoreBoard.textContent = `Score: ${score}`;
+
+      setTimeout(() => {
+        srBurnsObj = new Burns();
+      }, 5000);
+    }
+  });
 }
 // EVENT LISTENERS
 
@@ -244,5 +284,7 @@ document.addEventListener("keydown", (event) => {
     homerObj.x += homerObj.speed;
     homerObj.x = Math.min(juegoAncho - homerObj.w, homerObj.x);
     homerObj.node.style.left = `${homerObj.x}px`;
+  }else if(event.key === "ArrowUp"){
+    disparoHomer();
   }
 });
