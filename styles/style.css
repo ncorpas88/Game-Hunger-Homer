@@ -64,3 +64,27 @@ button {
   height: 180px;
 }
 
+
+#score-container {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 280;
+  height: 800;
+  padding: 0px;
+  
+}
+
+#score {
+  background-image: url("../images/yxo0pdcfd3k11.webp");
+  color: red;
+  font-size: 35px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  width: 200;
+  height: 500;
+  border: 8px solid black;
+  border-radius: 30px;
+  padding: 10px;
+}
