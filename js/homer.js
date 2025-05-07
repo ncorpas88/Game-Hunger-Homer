@@ -10,7 +10,7 @@ class Homer{
         this.y = 570;
         this.w = 85;
         this.h = 110;
-        this.speed = 15
+        this.speed = 18
 
         // definimos dimensiones iniciales
         this.node.style.width = `${this.w}px`;

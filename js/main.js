@@ -6,12 +6,24 @@ const gameScreenNode = document.querySelector("#game-screen");
 const gameOverScreenNode = document.querySelector("#game-over-screen");
 const gameBoxNode = document.querySelector("#game-box");
 const scoreBoard = document.querySelector("#score");
-const bgMusic = new Audio(`./sounds/music.mp3`)
+const bgMusic = new Audio(`./sounds/music.mp3`);
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
 const musicGameOver = new Audio(`./sounds/gameover.mp3`);
 musicGameOver.loop = true;
 musicGameOver.volume = 0.5;
+const soundHomer = new Audio(`./sounds/homer-d-oh_1.mp3`);
+soundHomer.loop = false;
+soundHomer.volume = 0.5;
+const soundDisparo = new Audio(`./sounds/pew-pew-disparo.mp3`);
+soundDisparo.loop = false;
+soundDisparo.volume = 0.5;
+const soundDona = new Audio(`./sounds/homer-woohoo.mp3`)
+soundDona.loop = false;
+soundDona.volume = 0.5;
+const soundExplosion = new Audio(`./sounds/explosion-47821.mp3`);
+soundExplosion.loop = false;
+soundExplosion.volume = 0.5;
 
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
@@ -70,7 +82,7 @@ function gameLoop() {
 
   beerDisparoArr.forEach((beerObj, index) => {
     beerObj.disparo();
-    if(beerObj.y + beerObj.h < 0){
+    if (beerObj.y + beerObj.h < 0) {
       beerObj.node.remove();
       beerDisparoArr.splice(index, 1);
     }
@@ -86,60 +98,59 @@ function gameLoop() {
   colisionFrutaDonut();
 }
 
-  function donutAppear() {
-    let nuevoDonut;
-    let colisiona = true;
-  
-    while (colisiona) {
-      const randomX = Math.random() * (gameBoxNode.offsetWidth - 40); // ancho aprox del donut
-      nuevoDonut = new Donut(randomX);
-      colisiona = false;
-  
-      // Verifica si colisiona con alguna fruta
-      for (let fruta of frutaObjArr) {
-        if (hayColision(nuevoDonut, fruta)) {
-          colisiona = true;
-          nuevoDonut.node.remove(); // eliminamos el nodo para evitar basura en el DOM
-          break;
-        }
+function donutAppear() {
+  let nuevoDonut;
+  let colisiona = true;
+
+  while (colisiona) {
+    const randomX = Math.random() * (gameBoxNode.offsetWidth - 40);
+    nuevoDonut = new Donut(randomX);
+    colisiona = false;
+
+    for (let fruta of frutaObjArr) {
+      if (hayColision(nuevoDonut, fruta)) {
+        colisiona = true;
+        nuevoDonut.node.remove();
+        break;
       }
     }
-  
-    donutObjArr.push(nuevoDonut);
   }
 
-  function frutaAppear() {
-    let fruta1, fruta2;
-    let colisiona = true;
-  
-    while (colisiona) {
-      const pos1 = Math.random() * (gameBoxNode.offsetWidth - 40);
-      const pos2 = Math.random() * (gameBoxNode.offsetWidth - 40);
-  
-      fruta1 = new Fruta("cereza", pos1);
-      fruta2 = new Fruta("fresa", pos2);
-  
-      colisiona = false;
-  
-      if (hayColision(fruta1, fruta2)) {
+  donutObjArr.push(nuevoDonut);
+}
+
+function frutaAppear() {
+  let fruta1, fruta2;
+  let colisiona = true;
+
+  while (colisiona) {
+    const pos1 = Math.random() * (gameBoxNode.offsetWidth - 40);
+    const pos2 = Math.random() * (gameBoxNode.offsetWidth - 40);
+
+    fruta1 = new Fruta("cereza", pos1);
+    fruta2 = new Fruta("fresa", pos2);
+
+    colisiona = false;
+
+    if (hayColision(fruta1, fruta2)) {
+      colisiona = true;
+    }
+
+    for (let donut of donutObjArr) {
+      if (hayColision(fruta1, donut) || hayColision(fruta2, donut)) {
         colisiona = true;
-      }
-  
-      for (let donut of donutObjArr) {
-        if (hayColision(fruta1, donut) || hayColision(fruta2, donut)) {
-          colisiona = true;
-          break;
-        }
-      }
-  
-      if (colisiona) {
-        fruta1.node.remove();
-        fruta2.node.remove();
+        break;
       }
     }
-  
-    frutaObjArr.push(fruta1, fruta2);
+
+    if (colisiona) {
+      fruta1.node.remove();
+      fruta2.node.remove();
+    }
   }
+
+  frutaObjArr.push(fruta1, fruta2);
+}
 
 function elementsDestoy() {
   if (donutObjArr.length < 730 && donutObjArr[0].y + donutObjArr[0].h >= 730) {
@@ -162,11 +173,12 @@ function colisionHomerDonut() {
       homerObj.h + homerObj.y > eachDonutObj.y
     ) {
       // ¡colisión detectada!
-      score ++;
+      score++;
       scoreBoard.textContent = `Score: ${score}`;
       donutObjArr[0].node.remove();
       donutObjArr.shift();
-
+      soundDona.play();
+      
     }
   });
 }
@@ -187,7 +199,7 @@ function colisionHomerFruit() {
       }
       frutaObjArr[index].node.remove();
       frutaObjArr.splice(index, 1);
-      
+      soundHomer.play();
     }
   });
 }
@@ -206,12 +218,11 @@ function gameOver() {
   gameOverScreenNode.style.display = "flex";
 }
 
-function resetGame(){
+function resetGame() {
   donutObjArr.forEach((eachDonut) => eachDonut.node.remove());
   frutaObjArr.forEach((eachFruta) => eachFruta.node.remove());
   homerObj.node.remove();
   srBurnsObj.node.remove();
-  
 
   donutObjArr = [];
   frutaObjArr = [];
@@ -226,59 +237,58 @@ function resetGame(){
 }
 
 function moverSrBurns() {
-
-  if(srBurnsObj.isMovingRight === true) {
+  if (srBurnsObj.isMovingRight === true) {
     srBurnsObj.x += srBurnsObj.speed;
     srBurnsObj.node.style.left = `${srBurnsObj.x}px`;
-  }else {
+  } else {
     srBurnsObj.x -= srBurnsObj.speed;
     srBurnsObj.node.style.left = `${srBurnsObj.x}px`;
   }
 
-  if(srBurnsObj.isMovingDown === true) {
+  if (srBurnsObj.isMovingDown === true) {
     srBurnsObj.y += srBurnsObj.speed;
     srBurnsObj.node.style.top = `${srBurnsObj.y}px`;
-  }else {
+  } else {
     srBurnsObj.y -= srBurnsObj.speed;
-    srBurnsObj.node.style.top = `${srBurnsObj.y}px`
+    srBurnsObj.node.style.top = `${srBurnsObj.y}px`;
   }
 }
 
-function colisionBurns(){
-  if(srBurnsObj.x > (gameBoxNode.offsetWidth - srBurnsObj.w)) {
+function colisionBurns() {
+  if (srBurnsObj.x > gameBoxNode.offsetWidth - srBurnsObj.w) {
     srBurnsObj.isMovingRight = false;
   }
 
-  if(srBurnsObj.y > (gameBoxNode.offsetHeight - srBurnsObj.h)) {
+  if (srBurnsObj.y > gameBoxNode.offsetHeight - srBurnsObj.h) {
     srBurnsObj.isMovingDown = false;
   }
 
-  if(srBurnsObj.x <= 0) {
+  if (srBurnsObj.x <= 0) {
     srBurnsObj.isMovingRight = true;
   }
 
-  if(srBurnsObj.y <= 0) {
+  if (srBurnsObj.y <= 0) {
     srBurnsObj.isMovingDown = true;
   }
 }
 
 function colisionBurnsHomer() {
-    if (
-      homerObj.x < srBurnsObj.x + srBurnsObj.w &&
-      homerObj.x + homerObj.w > srBurnsObj.x &&
-      homerObj.y < srBurnsObj.y + srBurnsObj.h &&
-      homerObj.h + homerObj.y > srBurnsObj.y
-    ) {
-      gameOver()
-    }
- 
+  if (
+    homerObj.x < srBurnsObj.x + srBurnsObj.w &&
+    homerObj.x + homerObj.w > srBurnsObj.x &&
+    homerObj.y < srBurnsObj.y + srBurnsObj.h &&
+    homerObj.h + homerObj.y > srBurnsObj.y
+  ) {
+    gameOver();
+  }
 }
 
-function disparoHomer(){
+function disparoHomer() {
   const x = homerObj.x + homerObj.w / 2 - 5;
   const y = homerObj.y;
   const newBeer = new Beer(x, y);
   beerDisparoArr.push(newBeer);
+  soundDisparo.play();
 }
 
 function colisionBurnsBeer() {
@@ -288,7 +298,7 @@ function colisionBurnsBeer() {
       eachBeerObj.x + eachBeerObj.w > srBurnsObj.x &&
       eachBeerObj.y < srBurnsObj.y + srBurnsObj.h &&
       eachBeerObj.y + eachBeerObj.h > srBurnsObj.y
-    ){
+    ) {
       eachBeerObj.node.remove();
       beerDisparoArr.splice(index, 1);
 
@@ -297,6 +307,7 @@ function colisionBurnsBeer() {
 
       score += 2;
       scoreBoard.textContent = `Score: ${score}`;
+      soundExplosion.play();
 
       setTimeout(() => {
         const randomX = Math.random() * (gameBoxNode.offsetWidth - 34);
@@ -326,11 +337,9 @@ function colisionFrutaDonut() {
   frutaObjArr.forEach((fruta, frutaIndex) => {
     donutObjArr.forEach((donut, donutIndex) => {
       if (hayColision(fruta, donut)) {
-        // Eliminar ambos nodos del DOM
         fruta.node.remove();
         donut.node.remove();
 
-        // Eliminar de los arrays
         frutaObjArr.splice(frutaIndex, 1);
         donutObjArr.splice(donutIndex, 1);
       }
@@ -362,7 +371,7 @@ document.addEventListener("keydown", (event) => {
     homerObj.x += homerObj.speed;
     homerObj.x = Math.min(juegoAncho - homerObj.w, homerObj.x);
     homerObj.node.style.left = `${homerObj.x}px`;
-  }else if(event.key === "ArrowUp"){
+  } else if (event.key === "ArrowUp") {
     disparoHomer();
   }
 });
