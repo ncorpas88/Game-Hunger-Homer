@@ -6,43 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hunger Homer</title>
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
   </head>
   <body>
-    
     <!-- PANTALLA DE INICIO -->
     <div id="splash-screen" class="container">
       <img src="./images/fondoinicio.png" width="400" alt="logo-inicio" />
-    <div class="botonera">
-      <button id="start-btn">
-        <img src="./images/play-unscreen.gif" alt="Start" class="icon">
-      </button>
-    </div>
-      
+      <div class="botonera">
+        <button id="start-btn">
+          <img src="./images/play-unscreen.gif" alt="Start" class="icon" />
+        </button>
+      </div>
     </div>
 
     <!-- PANTALLA DE JUEGO -->
     <div id="game-screen" class="container">
-      
       <!-- Elementos del juego como puntuación, vidas, etc deberia ir aqui (dentro del game-screen pero fuera del game-box) -->
       <div id="game-box">
         <div id="score-container">
-          <div id="score">Puntos: 3</div>
+          <div id="score">Score: 3</div>
         </div>
         <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
-         <div id="homer"></div>
+        <div id="homer"></div>
       </div>
     </div>
 
     <!-- PANTALLA FINAL  -->
     <div id="game-over-screen" class="container">
+      <div id="final-score-container">
+        <div id="score-fin">Score total: 0</div>
+      </div>
       <img src="./images/gameover.png" width="400" alt="logo-game-over" />
-     
       <div class="botonreset">
         <button id="restart-btn">
-        <img src="./images/play-unscreen.gif" alt="reset" class="resetIcon">
-      </button>
+          <img src="./images/play-unscreen.gif" alt="reset" class="resetIcon" />
+        </button>
       </div>
-      
     </div>
 
     <!--SCRIPT JAVASCRIPT-->

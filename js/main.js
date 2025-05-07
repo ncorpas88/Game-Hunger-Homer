@@ -216,6 +216,10 @@ function gameOver() {
 
   //3 mostrar pantalla final
   gameOverScreenNode.style.display = "flex";
+
+  //puntaje final
+  const scoreFinalNode = document.querySelector("#score-fin");
+  scoreFinalNode.textContent = `Puntaje total: ${score}`;
 }
 
 function resetGame() {
