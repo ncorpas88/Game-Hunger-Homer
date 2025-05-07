@@ -2,7 +2,7 @@ class Homer{
     constructor(){
 
         this.node = document.createElement("img"); // representacion visual de Homer
-        this.node.src = "./images/homer.png"; // apariencia visual de Homer
+        this.node.src = "./images/runner.gif"; // apariencia visual de Homer
 
         gameBoxNode.append(this.node); // coge el nodo de la imagen y lo inserta en el juego
 

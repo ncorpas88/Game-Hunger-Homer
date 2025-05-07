@@ -216,6 +216,10 @@ function colisionBurnsHomer() {
     }
  
 }
+
+function disparoHomer(){
+  
+}
 // EVENT LISTENERS
 
 startBtnNode.addEventListener("click", () => {
