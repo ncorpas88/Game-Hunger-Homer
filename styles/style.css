@@ -55,7 +55,7 @@ body {
 .botonera,
 .botonreset {
   position: relative;
-  bottom: 295px;
+  bottom: 305px;
   right: -260px;
 }
 
@@ -71,11 +71,11 @@ button {
 }
 
 .icon {
-  height: 190px;
+  height: 200px;
 }
 
 .resetIcon {
-  height: 180px;
+  height: 280px;
 }
 
 
@@ -128,14 +128,14 @@ button {
 .drop-down {
   position: relative; 
   display: inline-block; 
-  bottom: 320px;
+  bottom: 330px;
   right: -263px;
   background-color: transparent;
  
 }
 
 .menusito {
-  height: 110px;
+  height: 130px;
 }
 
 .drop-down-btn {

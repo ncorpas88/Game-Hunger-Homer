@@ -9,8 +9,8 @@ constructor(x, y){
 
     this.x = x;
     this.y = y;
-    this.w = 11;
-    this.h = 20;
+    this.w = 15;
+    this.h = 22;
     this.speed = 6;
 
     // defino dimensiones iniciales
