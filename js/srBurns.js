@@ -10,7 +10,7 @@ class Burns {
         this.y = -198;
         this.w = 50;
         this.h = 60;
-        this.speed = 2
+        this.speed = 3
         this.isMovingRigt = true;
         this.isMovingDown = true;
         

@@ -71,11 +71,11 @@ function startGame() {
   // 5. iniciamos otro intervalo del juego
   donutIntervalId = setInterval(() => {
     donutAppear();
-  }, 1500); //los donuts aparecen cada dos segundos
+  }, 1200); //los donuts aparecen cada dos segundos
 
   frutaIntervalId = setInterval(() => {
     frutaAppear();
-  }, 1500);
+  }, 1200);
 }
 
 function gameLoop() {
