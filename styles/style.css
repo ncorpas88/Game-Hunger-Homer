@@ -22,13 +22,13 @@ body {
 
 #game-box {
   background-color: darkgray;
-  width: 400px;
-  height: 700px;
+  width: 800px;
+  height: 452px;
 
   position: relative;
   overflow: hidden; 
   user-select: none; 
-  background-image: url("../images/fondojuego.png");
+  background-image: url("../images/Springfield.jpg");
   background-position: center;
   background-size: 100%;
 }
@@ -55,8 +55,8 @@ body {
 .botonera,
 .botonreset {
   position: relative;
-  bottom: 435px;
-  right: 60px;
+  bottom: 295px;
+  right: -260px;
 }
 
 
@@ -71,7 +71,7 @@ button {
 }
 
 .icon {
-  height: 170px;
+  height: 190px;
 }
 
 .resetIcon {

@@ -42,7 +42,7 @@ let donutIntervalId = null;
 let frutaIntervalId = null;
 
 let score = 3;
-const juegoAncho = 400;
+const juegoAncho = 800;
 // FUNCIONES GLOBALES DEL JUEGO
 
 function startGame() {

@@ -7,9 +7,9 @@ class Homer{
         gameBoxNode.append(this.node); // coge el nodo de la imagen y lo inserta en el juego
 
         this.x = 50;
-        this.y = 570;
-        this.w = 85;
-        this.h = 110;
+        this.y = 328;
+        this.w = 95;
+        this.h = 118;
         this.speed = 18
 
         // definimos dimensiones iniciales
