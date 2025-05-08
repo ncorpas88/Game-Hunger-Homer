@@ -125,3 +125,68 @@ button {
   padding: 10px;
 }
 
+.drop-down {
+  position: relative; 
+  display: inline-block; 
+  bottom: 320px;
+  right: -263px;
+  background-color: transparent;
+ 
+}
+
+.menusito {
+  height: 110px;
+}
+
+.drop-down-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.drop-down-content {
+  display: none; 
+  position: absolute; 
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; 
+}
+
+.pergamino {
+  display: none;
+  position: relative;
+  background-color: transparent;
+  width: 350px;
+  height: auto;
+  margin-top: -414px;
+  margin-right: 150px;
+}
+
+.xx {
+  width: 100%;
+  display: block;
+  
+
+
+}
+
+
+#btn-X {
+  position: absolute;
+  top: 10px; /* ajusta según la posición deseada */
+  right: 10px; /* ajusta según la posición deseada */
+  background: none;
+  border: none;
+  cursor: pointer;
+
+}
+
+.cierrex {
+  width: 30px; /* tamaño del ícono */
+  height: 30px;
+  margin-top: 160px;
+  margin-right: 140px;
+}
+

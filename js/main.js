@@ -28,6 +28,10 @@ soundExplosion.volume = 0.5;
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
 const restartBtnNode = document.querySelector("#restart-btn");
+const menuBtnNode = document.querySelector("#boton-menu"); // nodo boton abrir menu
+const menuInstrucciones = document.querySelector(".pergamino");
+const cerrarMenuNode = document.querySelector("#btn-X") // nodo boton cerrar menu
+const menuCerrarInstrucciones = document.querySelector(".pergamino");
 // Game box
 
 // VARIABLES GLOBALES DEL JUEGO
@@ -351,6 +355,14 @@ function colisionFrutaDonut() {
   });
 }
 
+function mostrarMenu() {
+  menuInstrucciones.style.display = "block";
+}
+
+function cerrarMenu() {
+  menuInstrucciones.style.display = "none";
+}
+
 // EVENT LISTENERS
 
 startBtnNode.addEventListener("click", () => {
@@ -379,3 +391,13 @@ document.addEventListener("keydown", (event) => {
     disparoHomer();
   }
 });
+menuBtnNode.addEventListener("click", () => {
+mostrarMenu();
+menuBtnNode.style.display = "none";
+});
+
+cerrarMenuNode.addEventListener("click", () => {
+  cerrarMenu();
+  menuBtnNode.style.display = "block";
+})
+
