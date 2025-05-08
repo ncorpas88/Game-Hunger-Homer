@@ -24,6 +24,9 @@ soundDona.volume = 0.5;
 const soundExplosion = new Audio(`./sounds/explosion-47821.mp3`);
 soundExplosion.loop = false;
 soundExplosion.volume = 0.5;
+const soundMenu = new Audio(`./sounds/menu.mp3`);
+soundMenu.loop = false;
+soundMenu.volume = 0.5;
 
 // Botones
 const startBtnNode = document.querySelector("#start-btn");
@@ -368,6 +371,7 @@ function cerrarMenu() {
 startBtnNode.addEventListener("click", () => {
   startGame();
   bgMusic.play();
+  soundMenu.play();
 });
 
 restartBtnNode.addEventListener("click", () => {
@@ -375,6 +379,7 @@ restartBtnNode.addEventListener("click", () => {
   startGame();
   bgMusic.play();
   musicGameOver.pause();
+  soundMenu.play();
   gameOverScreenNode.style.display = "none";
 });
 
@@ -394,10 +399,12 @@ document.addEventListener("keydown", (event) => {
 menuBtnNode.addEventListener("click", () => {
 mostrarMenu();
 menuBtnNode.style.display = "none";
+soundMenu.play();
 });
 
 cerrarMenuNode.addEventListener("click", () => {
   cerrarMenu();
   menuBtnNode.style.display = "block";
+  soundMenu.play();
 })
 
