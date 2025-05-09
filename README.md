@@ -44,6 +44,7 @@ Consigue la mayor cantidad de puntos posible antes de que el Sr. Burns acabe con
 - HTML5 
 - CSS
 - JavaScript
+- DOM Manipulation
 
 ---
 
@@ -68,5 +69,9 @@ Desarrollado por [Natanael]
 - Música y efectos de sonido personalizados.
 
 ---
+
+## lincks
+### Deploy
+[Linck](https://ncorpas88.github.io/Game-Hunger-Homer/)
 
 ¡Gracias por jugar y que viva el Donut! 🍩
