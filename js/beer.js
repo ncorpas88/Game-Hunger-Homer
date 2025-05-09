@@ -1,9 +1,7 @@
 class Beer {
-
-constructor(x, y){
-
+  constructor(x, y) {
     this.node = document.createElement("img");
-    this.node.src = "./images/beer.png"
+    this.node.src = "./images/beer.png";
 
     gameBoxNode.append(this.node);
 
@@ -22,12 +20,12 @@ constructor(x, y){
 
     this.node.style.left = `${this.x}px`;
     this.node.style.top = `${this.y}px`;
-}
+  }
 
-    //metodos
+  //metodos
 
-    disparo(){
-        this.y -= this.speed;
-        this.node.style.top = `${this.y}px`;
-    }
+  disparo() {
+    this.y -= this.speed;
+    this.node.style.top = `${this.y}px`;
+  }
 }

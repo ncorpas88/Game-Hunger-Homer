@@ -18,7 +18,7 @@ soundHomer.volume = 0.5;
 const soundDisparo = new Audio(`./sounds/pew-pew-disparo.mp3`);
 soundDisparo.loop = false;
 soundDisparo.volume = 0.5;
-const soundDona = new Audio(`./sounds/homer-woohoo.mp3`)
+const soundDona = new Audio(`./sounds/homer-woohoo.mp3`);
 soundDona.loop = false;
 soundDona.volume = 0.5;
 const soundExplosion = new Audio(`./sounds/explosion-47821.mp3`);
@@ -33,7 +33,7 @@ const startBtnNode = document.querySelector("#start-btn");
 const restartBtnNode = document.querySelector("#restart-btn");
 const menuBtnNode = document.querySelector("#boton-menu"); // nodo boton abrir menu
 const menuInstrucciones = document.querySelector(".pergamino");
-const cerrarMenuNode = document.querySelector("#btn-X") // nodo boton cerrar menu
+const cerrarMenuNode = document.querySelector("#btn-X"); // nodo boton cerrar menu
 const menuCerrarInstrucciones = document.querySelector(".pergamino");
 // Game box
 
@@ -178,14 +178,13 @@ function colisionHomerDonut() {
       homerObj.x + homerObj.w > eachDonutObj.x &&
       homerObj.y < eachDonutObj.y + eachDonutObj.h &&
       homerObj.h + homerObj.y > eachDonutObj.y
-    ) {
+    ){
       // ¡colisión detectada!
       score++;
       scoreBoard.textContent = `Score: ${score}`;
       donutObjArr[0].node.remove();
       donutObjArr.shift();
       soundDona.play();
-      
     }
   });
 }
@@ -397,14 +396,13 @@ document.addEventListener("keydown", (event) => {
   }
 });
 menuBtnNode.addEventListener("click", () => {
-mostrarMenu();
-menuBtnNode.style.display = "none";
-soundMenu.play();
+  mostrarMenu();
+  menuBtnNode.style.display = "none";
+  soundMenu.play();
 });
 
 cerrarMenuNode.addEventListener("click", () => {
   cerrarMenu();
   menuBtnNode.style.display = "block";
   soundMenu.play();
-})
-
+});
