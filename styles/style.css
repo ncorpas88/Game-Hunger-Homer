@@ -200,9 +200,10 @@ button {
 
 @media (max-width: 780px) {
   #game-box {
-    width: 100vw; /* Ocupa todo el ancho de la pantalla */
-    height: calc(100vw * 452 / 800); /* Mantiene la proporción 800x452 */
-    background-size: cover; /* Ajusta el fondo para que cubra todo */
+    width: 90vw; 
+    height: calc(90vw * 452 / 800); 
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 
   #touch-controls {
