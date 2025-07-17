@@ -173,3 +173,26 @@ button {
   margin-top: 120px;
   margin-right: 140px;
 }
+
+#touch-controls {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.touch-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  user-select: none;
+  touch-action: manipulation;
+}

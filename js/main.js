@@ -35,6 +35,9 @@ const menuBtnNode = document.querySelector("#boton-menu"); // nodo boton abrir m
 const menuInstrucciones = document.querySelector(".pergamino");
 const cerrarMenuNode = document.querySelector("#btn-X"); // nodo boton cerrar menu
 const menuCerrarInstrucciones = document.querySelector(".pergamino");
+const btnLeft = document.querySelector("#btn-left");
+const btnRight = document.querySelector("#btn-right");
+const btnFire = document.querySelector("#btn-fire");
 // Game box
 
 // VARIABLES GLOBALES DEL JUEGO
@@ -405,4 +408,68 @@ cerrarMenuNode.addEventListener("click", () => {
   cerrarMenu();
   menuBtnNode.style.display = "block";
   soundMenu.play();
+});
+
+// Funciones para mover Homer
+function moveLeft() {
+  if (!homerObj) return;
+  homerObj.x -= homerObj.speed;
+  homerObj.x = Math.max(0, homerObj.x);
+  homerObj.node.style.left = `${homerObj.x}px`;
+}
+
+function moveRight() {
+  if (!homerObj) return;
+  homerObj.x += homerObj.speed;
+  homerObj.x = Math.min(juegoAncho - homerObj.w, homerObj.x);
+  homerObj.node.style.left = `${homerObj.x}px`;
+}
+
+btnLeft.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveLeft();
+});
+btnRight.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveRight();
+});
+btnFire.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  disparoHomer();
+});
+
+
+let leftInterval = null;
+let rightInterval = null;
+
+btnLeft.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  if (leftInterval) return;
+  leftInterval = setInterval(moveLeft, 50);
+});
+btnLeft.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  clearInterval(leftInterval);
+  leftInterval = null;
+});
+btnLeft.addEventListener("touchcancel", (e) => {
+  e.preventDefault();
+  clearInterval(leftInterval);
+  leftInterval = null;
+});
+
+btnRight.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  if (rightInterval) return;
+  rightInterval = setInterval(moveRight, 50);
+});
+btnRight.addEventListener("touchend", (e) => {
+  e.preventDefault();
+  clearInterval(rightInterval);
+  rightInterval = null;
+});
+btnRight.addEventListener("touchcancel", (e) => {
+  e.preventDefault();
+  clearInterval(rightInterval);
+  rightInterval = null;
 });
