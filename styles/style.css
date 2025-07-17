@@ -196,3 +196,48 @@ button {
   user-select: none;
   touch-action: manipulation;
 }
+
+
+@media (max-width: 780px) {
+  #game-box {
+    width: 100vw; /* Ocupa todo el ancho de la pantalla */
+    height: calc(100vw * 452 / 800); /* Mantiene la proporción 800x452 */
+    background-size: cover; /* Ajusta el fondo para que cubra todo */
+  }
+
+  #touch-controls {
+    gap: 10px;
+    bottom: 10px;
+  }
+
+  .touch-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .container {
+    margin: 20px;
+    padding: 0 10px;
+  }
+
+  #score {
+    font-size: 24px;
+    width: 140px;
+    height: auto;
+    padding: 8px;
+  }
+
+  #score-fin {
+    font-size: 24px;
+    width: 140px;
+    height: auto;
+    padding: 8px;
+  }
+
+  .botonera,
+  .botonreset {
+    bottom: 150px; 
+    right: -100px;  
+  }
+}
